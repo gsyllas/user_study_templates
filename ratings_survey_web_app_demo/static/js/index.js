@@ -6,7 +6,7 @@ function getRndInteger(min, max) {
 // Function for shuffling an array
 function arrShuffle(array, array2) {
     let currentIndex = array.length,  randomIndex;
-  
+   
     // While there remain elements to shuffle...
     while (currentIndex != 0) {
         // Pick a remaining element...
@@ -105,7 +105,7 @@ var defsurveyJSON = {
                 {
                     type: "html",
                     name: "Info",
-                    html: "<p>The survey comprises 25 tests, where each test presents an audio clip of speech with duration up to 10 seconds.\n</p>\n\n<p>Then the evaluator is required to rate the speech naturalness of the given audio clip in a likert scale between 1-5, with 1 indicating \"non-speech\" and 5 completely \"natural speech\" .\n</p>\n\n\n<br>\n<br>\n<br>\n============================\n<p>\n<strong>Required Browser:</strong> Firefox, Chrome, Safari\n</p>\n<p>\n<strong>Estimated time duration to complete the survey:</strong> 10 to 15 minutes\n</p>\n\n<p> <strong>For questions please contact:</strong> <a href=\"mailto:kosmas.kritsis@athenarc.gr\">kosmas.kritsis@athenarc.gr</a> \n</p>"
+                    html: "<p>The survey comprises 25 tests, where each test presents an audio clip of speech with duration up to 10 seconds.\n</p>\n\n<p>Then the evaluator is required to rate the speech naturalness of the given audio clip in a likert scale between 1-5, with 1 indicating \"non-speech\" and 5 completely \"natural speech\" .\n</p>\n\n\n<br>\n<br>\n<br>\n============================\n<p>\n<strong>Required Browser:</strong> Firefox, Chrome, Safari\n</p>\n<p>\n<strong>Estimated time duration to complete the survey:</strong> 10 to 15 minutes\n</p>\n\n<p> <strong>For questions please contact:</strong> <a href=\"mailto:syllasgiorgos@gmail.com \">syllasgiorgos@gmail.com </a> \n</p>"
                 }
             ],
             title: " Survey Info: "
@@ -213,7 +213,7 @@ var defTestPage = {
 var tests_lst = [0,2,4,5];
 
 // We declare the name of the models. Must match the name of the folders containing the generated wavs
-var models = ['01_GT_LJS', '02_GT_WaveGlow']
+var models = ['deterministic_50_epochs', 'deterministic_finetuned_speaker1']
 
 // Variable to store all paths for the wavs of the random test
 var test_paths = []
