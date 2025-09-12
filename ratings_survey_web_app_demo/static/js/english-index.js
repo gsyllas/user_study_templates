@@ -95,10 +95,9 @@ Survey.StylesManager.applyTheme();
 // We declare the main structure of the survey allong with the first page 
 // + demographics questions 
 // + final feedback page
-
 var defsurveyJSON = {
-    title: " Νευρωνική Σύνθεση Ομιλίας - TTS ", // Translated
-    description: " Δοκιμή για την αξιολόγηση της απόδοσης συστημάτων νευρωνικής σύνθεσης ομιλίας ", // Translated
+    title: " Neural Speech Synthesis - TTS ",
+    description: " Test for evaluating the performance of neural speech synthesis systems ",
     pages: [
         {
             name: "Intro",
@@ -106,10 +105,10 @@ var defsurveyJSON = {
                 {
                     type: "html",
                     name: "Info",
-                    html: "<p>Η έρευνα περιλαμβάνει 25 δοκιμές, όπου κάθε δοκιμή παρουσιάζει ένα ηχητικό κλιπ ομιλίας διάρκειας έως 10 δευτερόλεπτα.\n</p>\n\n<p>Στη συνέχεια, ο αξιολογητής καλείται να βαθμολογήσει τη φυσικότητα της ομιλίας του δοθέντος ηχητικού κλιπ σε κλίμακα Likert από 1 έως 5, όπου το 1 υποδηλώνει \"μη-ομιλία\" και το 5 \"εντελώς φυσική ομιλία\" .\n</p>\n\n\n<br>\n<br>\n<br>\n============================\n<p>\n<strong>Απαιτούμενος Περιηγητής:</strong> Firefox, Chrome, Safari\n</p>\n<p>\n<strong>Εκτιμώμενος χρόνος ολοκλήρωσης της έρευνας:</strong> 10 έως 15 λεπτά\n</p>\n\n<p> <strong>Για ερωτήσεις επικοινωνήστε με:</strong> <a href=\"mailto:syllasgiorgos@gmail.com\">syllasgiorgos@gmail.com</a> \n</p>" // Translated
+                    html: "<p>The survey comprises 25 tests, where each test presents an audio clip of speech with duration up to 10 seconds.\n</p>\n\n<p>Then the evaluator is required to rate the speech naturalness of the given audio clip in a likert scale between 1-5, with 1 indicating \"non-speech\" and 5 completely \"natural speech\" .\n</p>\n\n\n<br>\n<br>\n<br>\n============================\n<p>\n<strong>Required Browser:</strong> Firefox, Chrome, Safari\n</p>\n<p>\n<strong>Estimated time duration to complete the survey:</strong> 10 to 15 minutes\n</p>\n\n<p> <strong>For questions please contact:</strong> <a href=\"mailto:syllasgiorgos@gmail.com \">syllasgiorgos@gmail.com </a> \n</p>"
                 }
             ],
-            title: " Πληροφορίες Έρευνας: " // Translated
+            title: " Survey Info: "
         },
         {
             name: "Demographics",
@@ -117,7 +116,7 @@ var defsurveyJSON = {
                 {
                     type: "radiogroup",
                     name: "question1",
-                    title: "Πόσο χρονών είστε;", // Translated
+                    title: "How old are you?",
                     isRequired: true,
                     choices: [
                         {
@@ -128,23 +127,22 @@ var defsurveyJSON = {
                             value: "item2",
                             text: "20-30"
                         }
-                        // Add more age ranges as needed
                     ],
                     hasOther: false
                 },
                 {
                     type: "radiogroup",
                     name: "question2",
-                    title: "Ποιο είναι το φύλο σας;", // Translated
+                    title: "What is your gender?",
                     isRequired: true,
                     choices: [
                         {
                             value: "item1",
-                            text: "Άνδρας" // Translated
+                            text: "Male"
                         },
                         {
                             value: "item2",
-                            text: "Γυναίκα" // Translated
+                            text: "Female"
                         }
                     ],
                     hasOther: false
@@ -152,14 +150,14 @@ var defsurveyJSON = {
                 {
                     type: "rating",
                     name: "question3",
-                    title: "Είστε εξοικειωμένοι με τη Μηχανική Μάθηση και την Τεχνητή Νοημοσύνη;", // Translated
+                    title: "Are you familiar with Machine Learning and Artificial Inteligence?",
                     isRequired: true,
-                    minRateDescription: "Ερασιτέχνης", // Translated
-                    maxRateDescription: "Ειδικός" // Translated
+                    minRateDescription: "Amateur",
+                    maxRateDescription: "Expert"
                 }
             ],
-            title: " Δημογραφικά ", // Translated
-            description: " Παρακαλώ απαντήστε στις ακόλουθες δημογραφικές ερωτήσεις. " // Translated
+            title: " Demographics ",
+            description: " Please answer the following demographic questions. "
         },
         {
             name: "Feedback",
@@ -167,11 +165,11 @@ var defsurveyJSON = {
                 {
                     type: "comment",
                     name: "feedback",
-                    title: "Θα χαρούμε να λάβουμε την ανατροφοδότησή σας. (προαιρετικό)", // Translated
+                    title: "We would be glad to receive your feedback. (optional)",
                     hideNumber: true
                 }
             ],
-            title: "Ανατροφοδότηση", // Translated
+            title: "Feedback",
             description: ""
         }
     ],
@@ -192,45 +190,18 @@ var defTestPage = {
         {
             type: "rating",
             name: "question1-",
-            title: "Παρακαλώ βαθμολογήστε τη φυσικότητα της ομιλίας:", // Translated
+            title: "Please rate the speech naturalness:",
             isRequired: true,
             rateMin: 1,
             rateMax: 5,
             rateStep: 0.5,
-            minRateDescription: "Δεν βγαίνει νόημα", // Translated
-            maxRateDescription: "Εντελώς φυσική" // Translated
+            minRateDescription: "Non-speech",
+            maxRateDescription: "Completely natural"
         }
     ],
-    title: "Δοκιμή ", // Translated
-    description: " Παρακαλώ ακούστε το ηχητικό κλιπ και απαντήστε στην ερώτηση." // Translated
+    title: "Test ",
+    description: " Please listen the audio clip and answer the question."
 };
-
-
-// We declare the format of the page that includes each wav audio with the rating question
-var defComparePage = {
-    name: "Test ",
-    questions: [
-        {
-            type: "html",
-            name: "audio-",
-            html: "test"
-        },
-        {
-            type: "rating",
-            name: "question2-",
-            title: "Παρακαλώ συγκρίνετε την πρωτότυπη με την παραγόμενη πρόταση, και βαθμολογίστε την ομοιότητα τους:", // Translated
-            isRequired: true,
-            rateMin: 1,
-            rateMax: 5,
-            rateStep: 0.5,
-            minRateDescription: "Καμία ομοιότητα", // Translated
-            maxRateDescription: "Το ίδιο ακριβώς" // Translated
-        }
-    ],
-    title: "Δοκιμή ", // Translated
-    description: " Παρακαλώ ακούστε τα ηχητικά κλιπ και απαντήστε στην ερώτηση." // Translated
-};
-
 
 
 
@@ -239,8 +210,7 @@ var defComparePage = {
 // tests_lst = [3,4,5] -> e.g. if we want to choose between test 3,4,5
 // In total we have 6 tests
 // var tests_lst = [0,1,2,3,4,5];
-// var tests_lst = [0,2,4,5];
-var tests_lst = [0,2];
+var tests_lst = [0,2,4,5];
 
 // We declare the name of the models. Must match the name of the folders containing the generated wavs
 var models = ['deterministic_50_epochs', 'deterministic_finetuned_speaker1']
@@ -310,33 +280,8 @@ $.getJSON('static/js/tests.json', function(data) {
 
         idxPush = i + 2
         surveyJSON.pages.splice(idxPush,0,new_page)
+
     }
-
-    // // TODO double wavs for comarison part
-    // for (let j=0; j< test_paths.length; j++){
-
-    //     idxTest = j + 1;
-    //     idxQ = idxTest
-
-    //     comparePage = JSON.parse(JSON.stringify(defComparePage));
-    //     comparePage.name = comparePage.name + idxTest;
-    //     comparePage.title = comparePage.title + idxTest;
-
-    //     new_html = test_wavs_html[j];
-
-    //     comparePage.questions[0].html = new_html;
-  
-    //     comparePage.questions[0].name = comparePage.questions[0].name + idxQ;
-    //     // idxQ++;
-    //     comparePage.questions[1].name = comparePage.questions[1].name + idxQ;
-    //     // idxQ++;
-       
-    //     new_compare_page = JSON.parse(JSON.stringify(comparePage));
-
-    //     idxPush = i + j + 2
-    //     surveyJSON.pages.splice(idxPush,0,new_compare_page)
-
-    // }
 
     // Initialize survey
     var survey = new Survey.Model(surveyJSON);

@@ -14,3 +14,13 @@ $ python app.py
 and access from your browser: http://0.0.0.0:portnumber (portnumber specified in app.py)
 
 For server side deployment, it depends on your server setup and network configurations (firwall etc.)
+
+
+ADDED FROM vaspapts
+curl -O https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh
+bash Anaconda3-2025.06-0-Linux-x86_64.sh 
+pip install flask
+pip install natsort
+
+git clone https://github.com/vpapage/user_study_templates.git
+python ratings_survey_web_app_demo/app.py >> output.log 
