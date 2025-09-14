@@ -23,4 +23,8 @@ pip install flask
 pip install natsort
 
 git clone https://github.com/vpapage/user_study_templates.git
+conda create -n survey_env python=3.10 -y
+conda activate survey_env
 python ratings_survey_web_app_demo/app.py >> output.log 
+
+

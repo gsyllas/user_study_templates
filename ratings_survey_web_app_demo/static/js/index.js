@@ -208,7 +208,7 @@ var defTestPage = {
 
 // We declare the format of the page that includes each wav audio with the rating question
 var defComparePage = {
-    name: "Test ",
+    name: "Compare ",
     questions: [
         {
             type: "html",
@@ -218,17 +218,17 @@ var defComparePage = {
         {
             type: "rating",
             name: "question2-",
-            title: "Παρακαλώ συγκρίνετε την πρωτότυπη με την παραγόμενη πρόταση, και βαθμολογίστε την ομοιότητα τους:", // Translated
+            title: "Παρακαλώ συγκρίνετε την πρωτότυπη με την παραγόμενη πρόταση, και βαθμολογίστε την ομοιότητα τους:", 
             isRequired: true,
             rateMin: 1,
             rateMax: 5,
             rateStep: 0.5,
-            minRateDescription: "Καμία ομοιότητα", // Translated
-            maxRateDescription: "Το ίδιο ακριβώς" // Translated
+            minRateDescription: "Καμία ομοιότητα",
+            maxRateDescription: "Το ίδιο ακριβώς"
         }
     ],
-    title: "Δοκιμή ", // Translated
-    description: " Παρακαλώ ακούστε τα ηχητικά κλιπ και απαντήστε στην ερώτηση." // Translated
+    title: "Σύγκριση ",
+    description: "Ακούστε τα δύο κλιπ και βαθμολογήστε την ομοιότητα."
 };
 
 
@@ -254,10 +254,12 @@ var t_idx = -1
 $.getJSON('static/js/tests.json', function(data) {
     //do stuff with your data here
     console.log("data:", data);
-        
+    let surveyJSON = JSON.parse(JSON.stringify(defsurveyJSON));
+    
     // Random integer
     // var t_idx = getRndInteger(0,5)
 
+    // OLD CODE ONE AUDIO 
     // Random element from a list
     t_idx = tests_lst[Math.floor(Math.random()*tests_lst.length)];
     console.log("Random test No: ",t_idx);
@@ -286,8 +288,6 @@ $.getJSON('static/js/tests.json', function(data) {
     console.log(test_paths);
     console.log(test_wavs_html);
 
-    let surveyJSON = JSON.parse(JSON.stringify(defsurveyJSON));
-
     for (let i=0; i< test_paths.length; i++){
 
         idxTest = i + 1;
@@ -312,7 +312,82 @@ $.getJSON('static/js/tests.json', function(data) {
         surveyJSON.pages.splice(idxPush,0,new_page)
     }
 
-    // // TODO double wavs for comarison part
+    // NEW CODE TWO AUDIO 
+    // Random element from a list XAXAXXAX
+    t_idx = tests_lst[Math.floor(Math.random()*tests_lst.length)];
+    console.log("Random test No: ",t_idx);
+
+    
+    for (let i=0;i<models.length;i++){
+        console.log("Wavs for model ",models[i]);
+        let model = models[i];
+
+        console.log(data['array'][i][t_idx]);
+        mod_t_wav = data['array'][i][t_idx];
+        console.log(mod_t_wav)
+        for (let j=0; j<mod_t_wav.length; j++){
+            
+            wav_path = model+'/'+mod_t_wav[j].toString()+'.wav'
+            test_paths.push(wav_path);
+
+            // wav_html = `<audio controls><source src=\"${window.location.href}static/wavs/${wav_path}\" type=\"audio/wav\"> Your browser does not support the <code>audio</code> element. </audio>`
+            var double_audio_html = 
+                `<table style="width:100%">
+                <tr>
+                    <th style="text-align:center">Original</th>
+                    <th style="text-align:center">Generated</th>
+                </tr> 
+                <tr>
+                    <td style="text-align:center">
+                    <audio controls>
+                        <source src="${window.location.href}static/wavs/${wav_path}" type="audio/wav">
+                        Your browser does not support the <code>audio</code> element.
+                    </audio>
+                    </td>
+                    <td style="text-align:center">
+                    <audio controls>
+                        <source src="${window.location.href}static/wavs/${wav_path}" type="audio/wav">
+                        Your browser does not support the <code>audio</code> element.
+                    </audio>
+                    </td>
+                </tr>
+                </table>`
+            test_wavs_html.push(double_audio_html)
+        }
+        
+    }
+    
+
+    arrShuffle(test_paths, test_wavs_html);
+    console.log(test_paths);
+    console.log(test_wavs_html);
+
+    for (let i=0; i< test_paths.length; i++){
+
+        idxTest = i + 1;
+        idxQ = idxTest
+
+        comparePage = JSON.parse(JSON.stringify(defComparePage));
+        comparePage.name = comparePage.name + idxTest;
+        comparePage.title = comparePage.title + idxTest;
+
+        new_html = test_wavs_html[i];
+
+        comparePage.questions[0].html = new_html;
+  
+        comparePage.questions[0].name = comparePage.questions[0].name + idxQ;
+        // idxQ++;
+        comparePage.questions[1].name = comparePage.questions[1].name + idxQ;
+        // idxQ++;
+       
+        new_page = JSON.parse(JSON.stringify(comparePage));
+
+        idxPush = i + 2
+        surveyJSON.pages.splice(idxPush,0,new_page)
+    }
+
+
+    // // TODO 2 wavs for comarison part
     // for (let j=0; j< test_paths.length; j++){
 
     //     idxTest = j + 1;
@@ -325,18 +400,23 @@ $.getJSON('static/js/tests.json', function(data) {
     //     new_html = test_wavs_html[j];
 
     //     comparePage.questions[0].html = new_html;
-  
-    //     comparePage.questions[0].name = comparePage.questions[0].name + idxQ;
-    //     // idxQ++;
-    //     comparePage.questions[1].name = comparePage.questions[1].name + idxQ;
-    //     // idxQ++;
-       
+
+    //     // Insert 2 audios
+    //     comparePage.questions[0].html = test_wavs_html[j];
+    //     comparePage.questions[0].name = comparePage.questions[0].name + idxQ + "_1";
+
+    //     comparePage.questions[1].name = comparePage.questions[1].name + idxQ + "_2";
+        
+    //     // Rating question name
+    //     comparePage.questions[2].name = comparePage.questions[2].name + idxQ; 
+
     //     new_compare_page = JSON.parse(JSON.stringify(comparePage));
 
-    //     idxPush = i + j + 2
+    //     idxPush = j + 2
     //     surveyJSON.pages.splice(idxPush,0,new_compare_page)
 
     // }
+
 
     // Initialize survey
     var survey = new Survey.Model(surveyJSON);
