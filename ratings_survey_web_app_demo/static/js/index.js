@@ -244,10 +244,12 @@ var defComparePage = {
 // In total we have 6 tests
 // var tests_lst = [0,1,2,3,4,5];
 // var tests_lst = [0,2,4,5];
-var tests_lst = [0,2];
+var tests_lst = [0,1,2];
+var comp_lst = tests_lst
 
 // We declare the name of the models. Must match the name of the folders containing the generated wavs
-var models = ['deterministic_50_epochs', 'deterministic_finetuned_speaker1']
+var models = ['DOKIMI/det_LORA', 'DOKIMI/llm', 'DOKIMI/det']
+var comp_models = ['SYGKRISI/llm_prompts_speaker', 'SYGKRISI/lora_prompts_speaker'] 
 
 // Variable to store all paths for the wavs of the random test
 var test_paths = []
@@ -270,23 +272,23 @@ $.getJSON('static/js/tests.json', function(data) {
 
     // NEW CODE TWO AUDIO 
     // Random element from a list
-    c_idx = tests_lst[Math.floor(Math.random()*tests_lst.length)];
+    c_idx = comp_lst[Math.floor(Math.random()*comp_lst.length)];
     console.log("Random test No: ",c_idx);
 
     
-    for (let i=0;i<models.length;i++){
-        console.log("Wavs for model ",models[i]);
-        let model = models[i];
+    for (let i=0;i<comp_models.length;i++){
+        console.log("Wavs for model ",comp_models[i]);
+        let model = comp_models[i];
 
         console.log(data['array'][i][c_idx]);
         mod_t_wav = data['array'][i][c_idx];
         console.log(mod_t_wav)
         for (let j=0; j<mod_t_wav.length; j++){
             
-            wav_path = model+'/'+mod_t_wav[j].toString()+'.wav'
+            wav_path = model+'/sentence_'+mod_t_wav[j].toString()+'.wav'
+            baseline_wav_path = 'SYGKRISI/baseline/sentence_'+mod_t_wav[j].toString()+'.wav'
             comp_paths.push(wav_path);
 
-            // wav_html = `<audio controls><source src=\"${window.location.href}static/wavs/${wav_path}\" type=\"audio/wav\"> Your browser does not support the <code>audio</code> element. </audio>`
             var double_audio_html = 
                 `<table style="width:100%">
                 <tr>
@@ -296,7 +298,7 @@ $.getJSON('static/js/tests.json', function(data) {
                 <tr>
                     <td style="text-align:center">
                     <audio controls>
-                        <source src="${window.location.href}static/wavs/${wav_path}" type="audio/wav">
+                        <source src="${window.location.href}static/wavs/${baseline_wav_path}" type="audio/wav">
                         Your browser does not support the <code>audio</code> element.
                     </audio>
                     </td>
@@ -358,7 +360,7 @@ $.getJSON('static/js/tests.json', function(data) {
         console.log(mod_t_wav)
         for (let j=0; j<mod_t_wav.length; j++){
             
-            wav_path = model+'/'+mod_t_wav[j].toString()+'.wav'
+            wav_path = model+'/sentence_'+mod_t_wav[j].toString()+'.wav'
             test_paths.push(wav_path);
 
             wav_html = `<audio controls><source src=\"${window.location.href}static/wavs/${wav_path}\" type=\"audio/wav\"> Your browser does not support the <code>audio</code> element. </audio>`
