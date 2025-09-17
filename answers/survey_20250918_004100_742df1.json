@@ -1,0 +1,38 @@
+{
+    "answers": {
+        "question3": 1,
+        "question2": "item2",
+        "question1": "item2",
+        "question1-1": 5,
+        "question1-2": 5,
+        "question1-3": 5,
+        "question1-4": 5,
+        "question1-5": 5,
+        "question1-6": 3,
+        "question2-1": 5,
+        "question2-2": 1,
+        "question2-3": 3,
+        "question2-4": 3,
+        "question2-5": 5,
+        "question2-6": 4,
+        "feedback": "now what ???? \ncorrect order babe ;)"
+    },
+    "test_survey": [
+        "deterministic_finetuned_speaker1/9.wav",
+        "deterministic_50_epochs/9.wav",
+        "deterministic_finetuned_speaker1/8.wav",
+        "deterministic_50_epochs/7.wav",
+        "deterministic_50_epochs/8.wav",
+        "deterministic_finetuned_speaker1/7.wav"
+    ],
+    "comp_survey": [
+        "deterministic_finetuned_speaker1/3.wav",
+        "deterministic_50_epochs/2.wav",
+        "deterministic_50_epochs/1.wav",
+        "deterministic_finetuned_speaker1/2.wav",
+        "deterministic_finetuned_speaker1/1.wav",
+        "deterministic_50_epochs/3.wav"
+    ],
+    "testN": 2,
+    "compN": 0
+}

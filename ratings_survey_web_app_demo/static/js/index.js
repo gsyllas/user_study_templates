@@ -31,7 +31,7 @@ function sendDataToServer(sender, options){
 
     // test_paths
     console.log("[SEND TO SERVER] test_paths: ", test_paths);
-    console.log("[SEND TO SERVER] test_paths_2: ", test_paths_2);
+    console.log("[SEND TO SERVER] comp_paths: ", comp_paths);
 
     dataJSON = {}
 
@@ -39,14 +39,13 @@ function sendDataToServer(sender, options){
     dataJSON.answers = sender.data
 
 
-
-    // TODO here have we a problem ?????
-
     // Get the order of the questions
-    dataJSON.survey = test_paths
+    dataJSON.test_survey = test_paths
+    dataJSON.comp_survey = comp_paths
 
     // Get the test number
     dataJSON.testN = t_idx
+    dataJSON.compN = c_idx
     
     $.ajax({
         type: "POST",
@@ -255,9 +254,9 @@ var test_paths = []
 var test_wavs_html = []
 var t_idx = -1
 
-var test_paths_2 = []
-var test_wavs_html_2 = []
-var t_idx_2 = -1
+var comp_paths = []
+var comp_wavs_html = []
+var c_idx = -1
 
 
 $.getJSON('static/js/tests.json', function(data) {
@@ -267,6 +266,82 @@ $.getJSON('static/js/tests.json', function(data) {
     
     // Random integer
     // var t_idx = getRndInteger(0,5)
+
+
+    // NEW CODE TWO AUDIO 
+    // Random element from a list
+    c_idx = tests_lst[Math.floor(Math.random()*tests_lst.length)];
+    console.log("Random test No: ",c_idx);
+
+    
+    for (let i=0;i<models.length;i++){
+        console.log("Wavs for model ",models[i]);
+        let model = models[i];
+
+        console.log(data['array'][i][c_idx]);
+        mod_t_wav = data['array'][i][c_idx];
+        console.log(mod_t_wav)
+        for (let j=0; j<mod_t_wav.length; j++){
+            
+            wav_path = model+'/'+mod_t_wav[j].toString()+'.wav'
+            comp_paths.push(wav_path);
+
+            // wav_html = `<audio controls><source src=\"${window.location.href}static/wavs/${wav_path}\" type=\"audio/wav\"> Your browser does not support the <code>audio</code> element. </audio>`
+            var double_audio_html = 
+                `<table style="width:100%">
+                <tr>
+                    <th style="text-align:center">Original</th>
+                    <th style="text-align:center">Generated</th>
+                </tr> 
+                <tr>
+                    <td style="text-align:center">
+                    <audio controls>
+                        <source src="${window.location.href}static/wavs/${wav_path}" type="audio/wav">
+                        Your browser does not support the <code>audio</code> element.
+                    </audio>
+                    </td>
+                    <td style="text-align:center">
+                    <audio controls>
+                        <source src="${window.location.href}static/wavs/${wav_path}" type="audio/wav">
+                        Your browser does not support the <code>audio</code> element.
+                    </audio>
+                    </td>
+                </tr>
+                </table>`
+            comp_wavs_html.push(double_audio_html)
+        }
+        
+    }
+    
+
+    arrShuffle(comp_paths, comp_wavs_html);
+    console.log(comp_paths);
+    console.log(comp_wavs_html);
+
+    for (let i=0; i< comp_paths.length; i++){
+
+        idxComp = i + 1;
+        idxQ = idxComp
+
+        comparePage = JSON.parse(JSON.stringify(defComparePage));
+        comparePage.name = comparePage.name + idxComp;
+        comparePage.title = comparePage.title + idxComp;
+
+        new_html = comp_wavs_html[i];
+
+        comparePage.questions[0].html = new_html;
+  
+        comparePage.questions[0].name = comparePage.questions[0].name + idxQ;
+        // idxQ++;
+        comparePage.questions[1].name = comparePage.questions[1].name + idxQ;
+        // idxQ++;
+       
+        new_page = JSON.parse(JSON.stringify(comparePage));
+
+        idxPush = i + 2
+        surveyJSON.pages.splice(idxPush,0,new_page)
+    }
+
 
     // OLD CODE ONE AUDIO 
     // Random element from a list
@@ -292,7 +367,6 @@ $.getJSON('static/js/tests.json', function(data) {
         
     }
     
-
     arrShuffle(test_paths, test_wavs_html);
     console.log(test_paths);
     console.log(test_wavs_html);
@@ -320,112 +394,6 @@ $.getJSON('static/js/tests.json', function(data) {
         idxPush = i + 2
         surveyJSON.pages.splice(idxPush,0,new_page)
     }
-
-    // NEW CODE TWO AUDIO 
-    // Random element from a list XAXAXXAX
-    // TODO create new list 
-    t_idx_2 = tests_lst[Math.floor(Math.random()*tests_lst.length)];
-    console.log("Random test No: ",t_idx_2);
-
-    
-    for (let i=0;i<models.length;i++){
-        console.log("Wavs for model ",models[i]);
-        let model = models[i];
-
-        console.log(data['array'][i][t_idx_2]);
-        mod_t_wav = data['array'][i][t_idx_2];
-        console.log(mod_t_wav)
-        for (let j=0; j<mod_t_wav.length; j++){
-            
-            wav_path = model+'/'+mod_t_wav[j].toString()+'.wav'
-            test_paths_2.push(wav_path);
-
-            // wav_html = `<audio controls><source src=\"${window.location.href}static/wavs/${wav_path}\" type=\"audio/wav\"> Your browser does not support the <code>audio</code> element. </audio>`
-            var double_audio_html = 
-                `<table style="width:100%">
-                <tr>
-                    <th style="text-align:center">Original</th>
-                    <th style="text-align:center">Generated</th>
-                </tr> 
-                <tr>
-                    <td style="text-align:center">
-                    <audio controls>
-                        <source src="${window.location.href}static/wavs/${wav_path}" type="audio/wav">
-                        Your browser does not support the <code>audio</code> element.
-                    </audio>
-                    </td>
-                    <td style="text-align:center">
-                    <audio controls>
-                        <source src="${window.location.href}static/wavs/${wav_path}" type="audio/wav">
-                        Your browser does not support the <code>audio</code> element.
-                    </audio>
-                    </td>
-                </tr>
-                </table>`
-            test_wavs_html_2.push(double_audio_html)
-        }
-        
-    }
-    
-
-    arrShuffle(test_paths_2, test_wavs_html_2);
-    console.log(test_paths_2);
-    console.log(test_wavs_html_2);
-
-    for (let i=0; i< test_paths_2.length; i++){
-
-        idxTest = i + 1;
-        idxQ = idxTest
-
-        comparePage = JSON.parse(JSON.stringify(defComparePage));
-        comparePage.name = comparePage.name + idxTest;
-        comparePage.title = comparePage.title + idxTest;
-
-        new_html = test_wavs_html_2[i];
-
-        comparePage.questions[0].html = new_html;
-  
-        comparePage.questions[0].name = comparePage.questions[0].name + idxQ;
-        // idxQ++;
-        comparePage.questions[1].name = comparePage.questions[1].name + idxQ;
-        // idxQ++;
-       
-        new_page = JSON.parse(JSON.stringify(comparePage));
-
-        idxPush = i + 2
-        surveyJSON.pages.splice(idxPush,0,new_page)
-    }
-
-
-    // // TODO 2 wavs for comarison part
-    // for (let j=0; j< test_paths.length; j++){
-
-    //     idxTest = j + 1;
-    //     idxQ = idxTest
-
-    //     comparePage = JSON.parse(JSON.stringify(defComparePage));
-    //     comparePage.name = comparePage.name + idxTest;
-    //     comparePage.title = comparePage.title + idxTest;
-
-    //     new_html = test_wavs_html[j];
-
-    //     comparePage.questions[0].html = new_html;
-
-    //     // Insert 2 audios
-    //     comparePage.questions[0].html = test_wavs_html[j];
-    //     comparePage.questions[0].name = comparePage.questions[0].name + idxQ + "_1";
-
-    //     comparePage.questions[1].name = comparePage.questions[1].name + idxQ + "_2";
-        
-    //     // Rating question name
-    //     comparePage.questions[2].name = comparePage.questions[2].name + idxQ; 
-
-    //     new_compare_page = JSON.parse(JSON.stringify(comparePage));
-
-    //     idxPush = j + 2
-    //     surveyJSON.pages.splice(idxPush,0,new_compare_page)
-
-    // }
 
 
     // Initialize survey
