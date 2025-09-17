@@ -31,11 +31,16 @@ function sendDataToServer(sender, options){
 
     // test_paths
     console.log("[SEND TO SERVER] test_paths: ", test_paths);
+    console.log("[SEND TO SERVER] test_paths_2: ", test_paths_2);
 
     dataJSON = {}
 
     // Get the answers
     dataJSON.answers = sender.data
+
+
+
+    // TODO here have we a problem ?????
 
     // Get the order of the questions
     dataJSON.survey = test_paths
@@ -196,7 +201,7 @@ var defTestPage = {
             isRequired: true,
             rateMin: 1,
             rateMax: 5,
-            rateStep: 0.5,
+            rateStep: 1,
             minRateDescription: "Δεν βγαίνει νόημα", // Translated
             maxRateDescription: "Εντελώς φυσική" // Translated
         }
@@ -222,7 +227,7 @@ var defComparePage = {
             isRequired: true,
             rateMin: 1,
             rateMax: 5,
-            rateStep: 0.5,
+            rateStep: 1,
             minRateDescription: "Καμία ομοιότητα",
             maxRateDescription: "Το ίδιο ακριβώς"
         }
@@ -249,6 +254,10 @@ var models = ['deterministic_50_epochs', 'deterministic_finetuned_speaker1']
 var test_paths = []
 var test_wavs_html = []
 var t_idx = -1
+
+var test_paths_2 = []
+var test_wavs_html_2 = []
+var t_idx_2 = -1
 
 
 $.getJSON('static/js/tests.json', function(data) {
@@ -314,21 +323,22 @@ $.getJSON('static/js/tests.json', function(data) {
 
     // NEW CODE TWO AUDIO 
     // Random element from a list XAXAXXAX
-    t_idx = tests_lst[Math.floor(Math.random()*tests_lst.length)];
-    console.log("Random test No: ",t_idx);
+    // TODO create new list 
+    t_idx_2 = tests_lst[Math.floor(Math.random()*tests_lst.length)];
+    console.log("Random test No: ",t_idx_2);
 
     
     for (let i=0;i<models.length;i++){
         console.log("Wavs for model ",models[i]);
         let model = models[i];
 
-        console.log(data['array'][i][t_idx]);
-        mod_t_wav = data['array'][i][t_idx];
+        console.log(data['array'][i][t_idx_2]);
+        mod_t_wav = data['array'][i][t_idx_2];
         console.log(mod_t_wav)
         for (let j=0; j<mod_t_wav.length; j++){
             
             wav_path = model+'/'+mod_t_wav[j].toString()+'.wav'
-            test_paths.push(wav_path);
+            test_paths_2.push(wav_path);
 
             // wav_html = `<audio controls><source src=\"${window.location.href}static/wavs/${wav_path}\" type=\"audio/wav\"> Your browser does not support the <code>audio</code> element. </audio>`
             var double_audio_html = 
@@ -352,17 +362,17 @@ $.getJSON('static/js/tests.json', function(data) {
                     </td>
                 </tr>
                 </table>`
-            test_wavs_html.push(double_audio_html)
+            test_wavs_html_2.push(double_audio_html)
         }
         
     }
     
 
-    arrShuffle(test_paths, test_wavs_html);
-    console.log(test_paths);
-    console.log(test_wavs_html);
+    arrShuffle(test_paths_2, test_wavs_html_2);
+    console.log(test_paths_2);
+    console.log(test_wavs_html_2);
 
-    for (let i=0; i< test_paths.length; i++){
+    for (let i=0; i< test_paths_2.length; i++){
 
         idxTest = i + 1;
         idxQ = idxTest
@@ -371,7 +381,7 @@ $.getJSON('static/js/tests.json', function(data) {
         comparePage.name = comparePage.name + idxTest;
         comparePage.title = comparePage.title + idxTest;
 
-        new_html = test_wavs_html[i];
+        new_html = test_wavs_html_2[i];
 
         comparePage.questions[0].html = new_html;
   
