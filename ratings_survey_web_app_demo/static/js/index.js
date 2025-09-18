@@ -101,7 +101,7 @@ Survey.StylesManager.applyTheme();
 // + final feedback page
 
 var defsurveyJSON = {
-    title: " Νευρωνική Σύνθεση Ομιλίας - TTS ", // Translated
+    title: "Σύνθεση Ομιλίας με τη χρήση τεχνητής νοημοσύνης - TTS ", // Translated
     description: " Δοκιμή για την αξιολόγηση της απόδοσης συστημάτων νευρωνικής σύνθεσης ομιλίας ", // Translated
     pages: [
         {
@@ -110,7 +110,7 @@ var defsurveyJSON = {
                 {
                     type: "html",
                     name: "Info",
-                    html: "<p>Η έρευνα περιλαμβάνει 25 δοκιμές, όπου κάθε δοκιμή παρουσιάζει ένα ηχητικό κλιπ ομιλίας διάρκειας έως 10 δευτερόλεπτα.\n</p>\n\n<p>Στη συνέχεια, ο αξιολογητής καλείται να βαθμολογήσει τη φυσικότητα της ομιλίας του δοθέντος ηχητικού κλιπ σε κλίμακα Likert από 1 έως 5, όπου το 1 υποδηλώνει \"μη-ομιλία\" και το 5 \"εντελώς φυσική ομιλία\" .\n</p>\n\n\n<br>\n<br>\n<br>\n============================\n<p>\n<strong>Απαιτούμενος Περιηγητής:</strong> Firefox, Chrome, Safari\n</p>\n<p>\n<strong>Εκτιμώμενος χρόνος ολοκλήρωσης της έρευνας:</strong> 10 έως 15 λεπτά\n</p>\n\n<p> <strong>Για ερωτήσεις επικοινωνήστε με:</strong> <a href=\"mailto:syllasgiorgos@gmail.com\">syllasgiorgos@gmail.com</a> \n</p>" // Translated
+                    html: "<p>Η έρευνα περιλαμβάνει την αξιολόγηση σύντομων ηχητικών κλιπ διάρκειας έως 10 δευτερόλεπτα.\n</p>\n\n<p>Στη συνέχεια, ο αξιολογητής καλείται να βαθμολογήσει τη φυσικότητα της ομιλίας του δοθέντος ηχητικού κλιπ σε κλίμακα Likert από 1 έως 5, όπου το 1 υποδηλώνει \"μη-ομιλία\" και το 5 \"εντελώς φυσική ομιλία\" .\n</p>\n\n\n<br>\n<br>\n<br>\n============================\n<p>\n<strong>Απαιτούμενος Περιηγητής:</strong> Firefox, Chrome, Safari\n</p>\n<p>\n<strong>Εκτιμώμενος χρόνος ολοκλήρωσης της έρευνας:</strong> 5 έως 10 λεπτά\n</p>\n\n<p> <strong>Για ερωτήσεις επικοινωνήστε με:</strong> <a href=\"mailto:syllasgiorgos@gmail.com\">syllasgiorgos@gmail.com</a> \n</p>" // Translated
                 }
             ],
             title: " Πληροφορίες Έρευνας: " // Translated
@@ -163,8 +163,8 @@ var defsurveyJSON = {
                     name: "question3",
                     title: "Είστε εξοικειωμένοι με τη Μηχανική Μάθηση και την Τεχνητή Νοημοσύνη;", // Translated
                     isRequired: true,
-                    minRateDescription: "Ερασιτέχνης", // Translated
-                    maxRateDescription: "Ειδικός" // Translated
+                    minRateDescription: "Καθόλου", // Translated
+                    maxRateDescription: "Πολύ" // Translated
                 }
             ],
             title: " Δημογραφικά ", // Translated
@@ -176,11 +176,11 @@ var defsurveyJSON = {
                 {
                     type: "comment",
                     name: "feedback",
-                    title: "Θα χαρούμε να λάβουμε την ανατροφοδότησή σας. (προαιρετικό)", // Translated
+                    title: "Θα χαρούμε να λάβουμε παρατηρήσεις/σχόλια. (προαιρετικό)", // Translated
                     hideNumber: true
                 }
             ],
-            title: "Ανατροφοδότηση", // Translated
+            title: "Παρατηρήσεις", // Translated
             description: ""
         }
     ],
@@ -210,7 +210,7 @@ var defTestPage = {
             maxRateDescription: "Εντελώς φυσική" // Translated
         }
     ],
-    title: "Δοκιμή ", // Translated
+    title: "Αξιολόγηση ", // Translated
     description: " Παρακαλώ ακούστε το ηχητικό και απαντήστε στην ερώτηση." // Translated
 };
 
