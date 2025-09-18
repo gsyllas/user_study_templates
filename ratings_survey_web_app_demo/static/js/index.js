@@ -126,11 +126,11 @@ var defsurveyJSON = {
                     choices: [
                         {
                             value: "item1",
-                            text: "-20"
+                            text: "Κάτω από 20"
                         },
                         {
                             value: "item2",
-                            text: "20-30"
+                            text: "Πάνω από 20"
                         }
                         // Add more age ranges as needed
                     ],
@@ -149,7 +149,12 @@ var defsurveyJSON = {
                         {
                             value: "item2",
                             text: "Γυναίκα" // Translated
+                        },
+                        {
+                            value: "item3",
+                            text: "'Αλλο" // Translated
                         }
+                        
                     ],
                     hasOther: false
                 },
@@ -206,7 +211,7 @@ var defTestPage = {
         }
     ],
     title: "Δοκιμή ", // Translated
-    description: " Παρακαλώ ακούστε το ηχητικό κλιπ και απαντήστε στην ερώτηση." // Translated
+    description: " Παρακαλώ ακούστε το ηχητικό και απαντήστε στην ερώτηση." // Translated
 };
 
 
@@ -244,11 +249,11 @@ var defComparePage = {
 // In total we have 6 tests
 // var tests_lst = [0,1,2,3,4,5];
 // var tests_lst = [0,2,4,5];
-var tests_lst = [0,1,2];
+var tests_lst = [0,1,2,3,4];
 var comp_lst = tests_lst
 
 // We declare the name of the models. Must match the name of the folders containing the generated wavs
-var models = ['DOKIMI/det_LORA', 'DOKIMI/llm', 'DOKIMI/det']
+var models = ['DOKIMI/det', 'DOKIMI/det_LORA', 'DOKIMI/ground', 'DOKIMI/llm', 'DOKIMI/llm_spk']
 var comp_models = ['SYGKRISI/llm_prompts_speaker', 'SYGKRISI/lora_prompts_speaker'] 
 
 // Variable to store all paths for the wavs of the random test
@@ -280,8 +285,8 @@ $.getJSON('static/js/tests.json', function(data) {
         console.log("Wavs for model ",comp_models[i]);
         let model = comp_models[i];
 
-        console.log(data['array'][i][c_idx]);
-        mod_t_wav = data['array'][i][c_idx];
+        console.log(data['comp_array'][i][c_idx]);
+        mod_t_wav = data['comp_array'][i][c_idx];
         console.log(mod_t_wav)
         for (let j=0; j<mod_t_wav.length; j++){
             
@@ -355,8 +360,8 @@ $.getJSON('static/js/tests.json', function(data) {
         console.log("Wavs for model ",models[i]);
         let model = models[i];
 
-        console.log(data['array'][i][t_idx]);
-        mod_t_wav = data['array'][i][t_idx];
+        console.log(data['test_array'][i][t_idx]);
+        mod_t_wav = data['test_array'][i][t_idx];
         console.log(mod_t_wav)
         for (let j=0; j<mod_t_wav.length; j++){
             
