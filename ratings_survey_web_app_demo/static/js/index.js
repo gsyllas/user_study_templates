@@ -110,7 +110,7 @@ var defsurveyJSON = {
                 {
                     type: "html",
                     name: "Info",
-                    html: "<p>Η έρευνα περιλαμβάνει την αξιολόγηση σύντομων ηχητικών κλιπ διάρκειας έως 10 δευτερόλεπτα.\n</p>\n\n<p>Στη συνέχεια, ο αξιολογητής καλείται να βαθμολογήσει τη φυσικότητα της ομιλίας του δοθέντος ηχητικού κλιπ σε κλίμακα Likert από 1 έως 5, όπου το 1 υποδηλώνει \"μη-ομιλία\" και το 5 \"εντελώς φυσική ομιλία\" .\n</p>\n\n\n<br>\n<br>\n<br>\n============================\n<p>\n<strong>Απαιτούμενος Περιηγητής:</strong> Firefox, Chrome, Safari\n</p>\n<p>\n<strong>Εκτιμώμενος χρόνος ολοκλήρωσης της έρευνας:</strong> 5 έως 10 λεπτά\n</p>\n\n<p> <strong>Για ερωτήσεις επικοινωνήστε με:</strong> <a href=\"mailto:syllasgiorgos@gmail.com\">syllasgiorgos@gmail.com</a> \n</p>" // Translated
+                    html: "<p>Η έρευνα περιλαμβάνει την αξιολόγηση σύντομων ηχητικών κλιπ διάρκειας έως 10 δευτερόλεπτα.\n</p>\n\n<p>Στη συνέχεια, ο αξιολογητής καλείται να βαθμολογήσει τη φυσικότητα της ομιλίας του δοθέντος ηχητικού κλιπ σε κλίμακα Likert από 1 έως 5. Πριν ξεκινήσετε την αξιολόγηση βεβαιωθείτε ότι είστε σε ένα ήσυχο περιβάλλον και εάν είναι εφικτό φορέστε ακουστικά.\" .\n</p>\n\n\n<br>\n<br>\n<br>\n============================\n<p>\n<strong>Απαιτούμενος Περιηγητής:</strong> Firefox, Chrome, Safari\n</p>\n<p>\n<strong>Εκτιμώμενος χρόνος ολοκλήρωσης της έρευνας:</strong> 5 έως 10 λεπτά\n</p>\n\n<p> <strong>Για ερωτήσεις επικοινωνήστε με:</strong> <a href=\"mailto:syllasgiorgos@gmail.com\">syllasgiorgos@gmail.com</a> \n</p>" // Translated
                 }
             ],
             title: " Πληροφορίες Έρευνας: " // Translated
@@ -130,7 +130,11 @@ var defsurveyJSON = {
                         },
                         {
                             value: "item2",
-                            text: "Πάνω από 20"
+                            text: "20-40"
+                        },
+                        {
+                            value: "item2",
+                            text: "Πάνω από 40"
                         }
                         // Add more age ranges as needed
                     ],
@@ -157,10 +161,27 @@ var defsurveyJSON = {
                         
                     ],
                     hasOther: false
+                },{
+                    type: "radiogroup",
+                    name: "question3",
+                    title: "Είναι τα Ελληνικά η πρώτη σας γλώσσα;", // Translated
+                    isRequired: true,
+                    choices: [
+                        {
+                            value: "item1",
+                            text: "Ναι" // Translated
+                        },
+                        {
+                            value: "item2",
+                            text: "Όχι" // Translated
+                        }
+                        
+                    ],
+                    hasOther: false
                 },
                 {
                     type: "rating",
-                    name: "question3",
+                    name: "question4",
                     title: "Είστε εξοικειωμένοι με τη Μηχανική Μάθηση και την Τεχνητή Νοημοσύνη;", // Translated
                     isRequired: true,
                     minRateDescription: "Καθόλου", // Translated
@@ -200,14 +221,25 @@ var defTestPage = {
         },
         {
             type: "rating",
-            name: "question1-",
+            name: "question1a-",
             title: "Παρακαλώ βαθμολογήστε τη φυσικότητα της ομιλίας:", // Translated
             isRequired: true,
             rateMin: 1,
             rateMax: 5,
             rateStep: 1,
-            minRateDescription: "Δεν βγαίνει νόημα", // Translated
+            minRateDescription: "Καθόλου φυσική", // Translated
             maxRateDescription: "Εντελώς φυσική" // Translated
+        },
+        {
+            type: "rating",
+            name: "question1b-",
+            title: "Παρακαλώ βαθμολογήστε την ευκολία κατανόησης της ομιλίας:", // Translated
+            isRequired: true,
+            rateMin: 1,
+            rateMax: 5,
+            rateStep: 1,
+            minRateDescription: "Δεν βγάζει νόημα", // Translated
+            maxRateDescription: "Εϊναι πλήρως κατανοητή" // Translated
         }
     ],
     title: "Αξιολόγηση ", // Translated
@@ -394,6 +426,8 @@ $.getJSON('static/js/tests.json', function(data) {
         testPage.questions[0].name = testPage.questions[0].name + idxQ;
         // idxQ++;
         testPage.questions[1].name = testPage.questions[1].name + idxQ;
+        // idxQ++;
+        testPage.questions[2].name = testPage.questions[2].name + idxQ;
         // idxQ++;
        
         new_page = JSON.parse(JSON.stringify(testPage));
