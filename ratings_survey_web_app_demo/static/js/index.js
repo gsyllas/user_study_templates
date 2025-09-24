@@ -259,17 +259,17 @@ var defComparePage = {
         {
             type: "rating",
             name: "question2-",
-            title: "Παρακαλώ συγκρίνετε την πρωτότυπη με την παραγόμενη πρόταση, και βαθμολογίστε την ομοιότητα τους:", 
+            title: "Παρακαλώ συγκρίνετε την πρωτότυπη με την παραγόμενη πρόταση, και βαθμολογίστε την ομοιότητα του ομιλητή στα δύο ηχητικά:", 
             isRequired: true,
             rateMin: 1,
             rateMax: 5,
             rateStep: 1,
-            minRateDescription: "Καμία ομοιότητα",
-            maxRateDescription: "Το ίδιο ακριβώς"
+            minRateDescription: "Οι δύο ομιλητές δεν έχουν καμία ομοιότητα",
+            maxRateDescription: "Οι δύο ομιλητές έχουν την ίδια φωνή"
         }
     ],
     title: "Σύγκριση ",
-    description: "Ακούστε τα δύο κλιπ και βαθμολογήστε την ομοιότητα."
+    description: "Ακούστε τα δύο κλιπ και βαθμολογήστε την ομοιότητα των ομιλητών."
 };
 
 
@@ -328,10 +328,6 @@ $.getJSON('static/js/tests.json', function(data) {
 
             var double_audio_html = 
                 `<table style="width:100%">
-                <tr>
-                    <th style="text-align:center">Original</th>
-                    <th style="text-align:center">Generated</th>
-                </tr> 
                 <tr>
                     <td style="text-align:center">
                     <audio controls>
@@ -411,7 +407,6 @@ $.getJSON('static/js/tests.json', function(data) {
     console.log(test_wavs_html);
 
     for (let i=0; i< test_paths.length; i++){
-
         idxTest = i + 1;
         idxQ = idxTest
 
