@@ -285,7 +285,7 @@ var tests_lst = [0,1,2,3,4];
 var comp_lst = tests_lst
 
 // We declare the name of the models. Must match the name of the folders containing the generated wavs
-var models = ['DOKIMI/det', 'DOKIMI/det_LORA', 'DOKIMI/ground', 'DOKIMI/llm', 'DOKIMI/llm_spk']
+var models = ['DOKIMI/det', 'DOKIMI/det_LORA', 'DOKIMI/ground2', 'DOKIMI/llm', 'DOKIMI/llm_spk']
 var comp_models = ['SYGKRISI/llm_prompts_speaker', 'SYGKRISI/lora_prompts_speaker'] 
 
 // Variable to store all paths for the wavs of the random test
