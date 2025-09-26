@@ -319,7 +319,7 @@ $.getJSON('static/js/tests.json', function(data) {
 
         console.log(data['comp_array'][i][c_idx]);
         mod_t_wav = data['comp_array'][i][c_idx];
-        mod_t_wav_base = data['comp_array'][2][c_idx];
+        mod_t_wav_base = data['comp_array'][i+2][c_idx];
         console.log(mod_t_wav)
         for (let j=0; j<mod_t_wav.length; j++){
             
