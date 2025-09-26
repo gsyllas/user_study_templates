@@ -319,11 +319,12 @@ $.getJSON('static/js/tests.json', function(data) {
 
         console.log(data['comp_array'][i][c_idx]);
         mod_t_wav = data['comp_array'][i][c_idx];
+        mod_t_wav_base = data['comp_array'][2][c_idx];
         console.log(mod_t_wav)
         for (let j=0; j<mod_t_wav.length; j++){
             
             wav_path = model+'/sentence_'+mod_t_wav[j].toString()+'.wav'
-            baseline_wav_path = 'SYGKRISI/baseline/sentence_'+mod_t_wav[j].toString()+'.wav'
+            baseline_wav_path = 'SYGKRISI/baseline/sentence_'+mod_t_wav_base[j].toString()+'.wav'
             comp_paths.push(wav_path);
 
             var double_audio_html = 
