@@ -287,6 +287,9 @@ var comp_lst = tests_lst
 // We declare the name of the models. Must match the name of the folders containing the generated wavs
 var models = ['DOKIMI/det', 'DOKIMI/det_LORA', 'DOKIMI/ground2', 'DOKIMI/llm', 'DOKIMI/llm_spk']
 var comp_models = ['SYGKRISI/llm_prompts_speaker', 'SYGKRISI/lora_prompts_speaker'] 
+// # TODO add one more list 
+// # the comp_models_1 and comp_models_2 will have as index from the test.json
+// # the index should be match both models 
 
 // Variable to store all paths for the wavs of the random test
 var test_paths = []
@@ -317,13 +320,31 @@ $.getJSON('static/js/tests.json', function(data) {
         console.log("Wavs for model ",comp_models[i]);
         let model = comp_models[i];
 
+        // # TODO 
+        // # console.log("Wavs for model_1 ",comp_models_1[i]);
+        // # let model_1 = comp_models_1[i];
+        
+        // # console.log("Wavs for model_2 ",comp_models_2[i]);
+        // # let model_2 = comp_models_2[i];
+
+
         console.log(data['comp_array'][i][c_idx]);
         mod_t_wav = data['comp_array'][i][c_idx];
+        // TODO delete the mod_t_wav_base
         mod_t_wav_base = data['comp_array'][i+2][c_idx];
         console.log(mod_t_wav)
         for (let j=0; j<mod_t_wav.length; j++){
+
+
+            // TODO 
+            // wav_path_1 = model_1+'/sentence_'+mod_t_wav[j].toString()+'.wav'
+            // wav_path_2 = model_2+'/sentence_'+mod_t_wav[j].toString()+'.wav'
+            // comp_paths.push(wav_path_1);
+            // comp_paths.push(wav_path_2);
+
             
             wav_path = model+'/sentence_'+mod_t_wav[j].toString()+'.wav'
+            // TODO replace baseline_wav_path with wav_path_2
             baseline_wav_path = 'SYGKRISI/baseline/sentence_'+mod_t_wav_base[j].toString()+'.wav'
             comp_paths.push(wav_path);
 
