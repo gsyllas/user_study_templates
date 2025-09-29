@@ -327,7 +327,7 @@ $.getJSON('static/js/tests.json', function(data) {
         // # console.log("Wavs for model_2 ",comp_models_2[i]);
         // # let model_2 = comp_models_2[i];
 
-
+        // TODO chabge the tables if you want 
         console.log(data['comp_array'][i][c_idx]);
         mod_t_wav = data['comp_array'][i][c_idx];
         // TODO delete the mod_t_wav_base
