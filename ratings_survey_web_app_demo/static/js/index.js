@@ -324,7 +324,7 @@ $.getJSON('static/js/tests.json', function(data) {
         // compare same model diferent index 
         // HERE it takes the next row if you want add 3 rows extra and tell it to take the +3 row 
         mod_t_wav = data['comp_array'][i][c_idx];
-        mod_t_wav_2 = data['comp_array'][i+1][c_idx];
+        mod_t_wav_2 = data['comp_array'][i][c_idx+1];
         console.log(mod_t_wav)
         console.log(mod_t_wav_2)
         for (let j=0; j<mod_t_wav.length; j++){
