@@ -32,6 +32,7 @@ function sendDataToServer(sender, options){
     // test_paths
     console.log("[SEND TO SERVER] test_paths: ", test_paths);
     console.log("[SEND TO SERVER] comp_paths: ", comp_paths);
+    console.log("[SEND TO SERVER] comp_paths_2: ", comp_paths_2);
 
     dataJSON = {}
 
@@ -42,6 +43,7 @@ function sendDataToServer(sender, options){
     // Get the order of the questions
     dataJSON.test_survey = test_paths
     dataJSON.comp_survey = comp_paths
+    dataJSON.comp_survey_2 = comp_paths_2
 
     // Get the test number
     dataJSON.testN = t_idx
@@ -297,6 +299,7 @@ var test_wavs_html = []
 var t_idx = -1
 
 var comp_paths = []
+var comp_paths_2 = []
 var comp_wavs_html = []
 var c_idx = -1
 
@@ -320,46 +323,46 @@ $.getJSON('static/js/tests.json', function(data) {
         console.log("Wavs for model ",comp_models[i]);
         let model = comp_models[i];
 
-        // # TODO 
-        // # console.log("Wavs for model_1 ",comp_models_1[i]);
-        // # let model_1 = comp_models_1[i];
+        // TODO 
+        console.log("Wavs for model_1 ",comp_models_1[i]);
+        let model_1 = comp_models_1[i];
         
-        // # console.log("Wavs for model_2 ",comp_models_2[i]);
-        // # let model_2 = comp_models_2[i];
+        console.log("Wavs for model_2 ",comp_models_2[i]);
+        let model_2 = comp_models_2[i];
 
         // TODO chabge the tables if you want 
         console.log(data['comp_array'][i][c_idx]);
         mod_t_wav = data['comp_array'][i][c_idx];
         // TODO delete the mod_t_wav_base
-        mod_t_wav_base = data['comp_array'][i+2][c_idx];
+        // mod_t_wav_base = data['comp_array'][i+2][c_idx];
         console.log(mod_t_wav)
         for (let j=0; j<mod_t_wav.length; j++){
 
 
             // TODO 
-            // wav_path_1 = model_1+'/sentence_'+mod_t_wav[j].toString()+'.wav'
-            // wav_path_2 = model_2+'/sentence_'+mod_t_wav[j].toString()+'.wav'
-            // comp_paths.push(wav_path_1);
-            // comp_paths.push(wav_path_2);
+            wav_path_1 = model_1+'/sentence_'+mod_t_wav[j].toString()+'.wav'
+            wav_path_2 = model_2+'/sentence_'+mod_t_wav[j].toString()+'.wav'
+            comp_paths.push(wav_path_1);
+            comp_paths_2.push(wav_path_2);
 
             
-            wav_path = model+'/sentence_'+mod_t_wav[j].toString()+'.wav'
-            // TODO replace baseline_wav_path with wav_path_2
-            baseline_wav_path = 'SYGKRISI/baseline/sentence_'+mod_t_wav_base[j].toString()+'.wav'
-            comp_paths.push(wav_path);
+            // wav_path = model+'/sentence_'+mod_t_wav[j].toString()+'.wav'
+            // // TODO replace baseline_wav_path with wav_path_2
+            // baseline_wav_path = 'SYGKRISI/baseline/sentence_'+mod_t_wav_base[j].toString()+'.wav'
+            // comp_paths.push(wav_path);
 
             var double_audio_html = 
                 `<table style="width:100%">
                 <tr>
                     <td style="text-align:center">
                     <audio controls>
-                        <source src="${window.location.href}static/wavs/${baseline_wav_path}" type="audio/wav">
+                        <source src="${window.location.href}static/wavs/${wav_path_1}" type="audio/wav">
                         Your browser does not support the <code>audio</code> element.
                     </audio>
                     </td>
                     <td style="text-align:center">
                     <audio controls>
-                        <source src="${window.location.href}static/wavs/${wav_path}" type="audio/wav">
+                        <source src="${window.location.href}static/wavs/${wav_path_2}" type="audio/wav">
                         Your browser does not support the <code>audio</code> element.
                     </audio>
                     </td>
@@ -373,6 +376,7 @@ $.getJSON('static/js/tests.json', function(data) {
 
     arrShuffle(comp_paths, comp_wavs_html);
     console.log(comp_paths);
+    console.log(comp_paths_2);
     console.log(comp_wavs_html);
 
     for (let i=0; i< comp_paths.length; i++){
@@ -393,7 +397,7 @@ $.getJSON('static/js/tests.json', function(data) {
         comparePage.questions[1].name = comparePage.questions[1].name + idxQ;
         // idxQ++;
        
-        new_page = JSON.parse(JSON.stringify(comparePage));
+        new_page = JSON.parse(JSON.stringify(comparePage))
 
         idxPush = i + 2
         surveyJSON.pages.splice(idxPush,0,new_page)
