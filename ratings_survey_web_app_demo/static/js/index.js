@@ -284,7 +284,7 @@ var defComparePage = {
 // var tests_lst = [0,1,2,3,4,5];
 // var tests_lst = [0,2,4,5];
 var tests_lst = [0,1,2,3,4];
-var comp_lst = tests_lst
+var comp_lst = [0,1,2]
 
 // We declare the name of the models. Must match the name of the folders containing the generated wavs
 var models = ['DOKIMI/det', 'DOKIMI/det_LORA', 'DOKIMI/ground2', 'DOKIMI/llm', 'DOKIMI/llm_spk']
