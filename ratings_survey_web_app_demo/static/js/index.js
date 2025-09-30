@@ -324,15 +324,18 @@ $.getJSON('static/js/tests.json', function(data) {
         // compare same model diferent index 
         // HERE it takes the next row if you want add 3 rows extra and tell it to take the +3 row 
         mod_t_wav = data['comp_array'][i][c_idx];
-        mod_t_wav_2 = data['comp_array'][i][c_idx+1];
+        console.log("WHAT WE SHALL COMPARE FOR MODEL"+comp_models[i])
         console.log(mod_t_wav)
-        console.log(mod_t_wav_2)
+        for (let j=0; j<mod_t_wav.length; j++){
+            console.log("we will compare: "+ mod_t_wav[j] + " with: "+ (mod_t_wav[j]+1))
+        }
+
         for (let j=0; j<mod_t_wav.length; j++){
 
 
             // TODO 
             wav_path_1 = model+'/sentence_'+mod_t_wav[j].toString()+'.wav'
-            wav_path_2 = model+'/sentence_'+mod_t_wav_2[j].toString()+'.wav'
+            wav_path_2 = model+'/sentence_'+(mod_t_wav[j]+1).toString()+'.wav'
             comp_paths.push(wav_path_1);
             comp_paths_2.push(wav_path_2);
 
@@ -365,7 +368,6 @@ $.getJSON('static/js/tests.json', function(data) {
     console.log(comp_wavs_html);
 
     for (let i=0; i< comp_paths.length; i++){
-
         idxComp = i + 1;
         idxQ = idxComp
 
@@ -396,6 +398,8 @@ $.getJSON('static/js/tests.json', function(data) {
 
     
     for (let i=0;i<models.length;i++){
+        break;
+
         console.log("Wavs for model ",models[i]);
         let model = models[i];
 
