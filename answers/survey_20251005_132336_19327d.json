@@ -1,0 +1,26 @@
+{
+    "answers": {
+        "question1": "item1",
+        "question2": "item1",
+        "question3": "item1",
+        "question4": 1,
+        "question2-1": 2,
+        "question2-2": 2,
+        "question2-3": 2,
+        "question2-4": 2,
+        "question2-5": 2,
+        "question2-6": 2,
+        "feedback": "Twra kalytera "
+    },
+    "test_survey": [],
+    "comp_survey": [
+        "POU_MOIAZOUN/llm_spk/sentence_2.wav",
+        "POU_MOIAZOUN/llm_spk/sentence_4.wav",
+        "POU_MOIAZOUN/det_LORA/sentence_10.wav",
+        "POU_MOIAZOUN/det_LORA/sentence_12.wav",
+        "SYGKRISI/baseline/sentence_20.wav",
+        "SYGKRISI/baseline/sentence_21.wav"
+    ],
+    "testN": 1,
+    "compN": 0
+}
