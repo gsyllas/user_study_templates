@@ -6,25 +6,25 @@ function getRndInteger(min, max) {
 // Function for shuffling an array
 function arrShuffle(array, array2) {
     let currentIndex = array.length,  randomIndex;
-   
+
     // While there remain elements to shuffle...
     while (currentIndex != 0) {
         // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
-  
+
         // And swap it with the current element.
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
         [array2[currentIndex], array2[randomIndex]] = [array2[randomIndex], array2[currentIndex]];
     }
-  
+
     return [array, array2];
 }
 
 
 // Function for sending post request to flask server with image data as a tensor
 function sendDataToServer(sender, options){
-    
+
     options.showDataSaving();
     console.log("sender: ", sender);
 
@@ -48,7 +48,7 @@ function sendDataToServer(sender, options){
     // Get the test number
     dataJSON.testN = t_idx
     dataJSON.compN = c_idx
-    
+
     $.ajax({
         type: "POST",
         url: "/postmethod",
@@ -59,7 +59,7 @@ function sendDataToServer(sender, options){
             console.log(response);
             options.showDataSavingSuccess();
         },
-        error: function(err) {  
+        error: function(err) {
             console.log(err);
             options.showDataSavingError();
         }
@@ -95,11 +95,11 @@ var defaultThemeColors = Survey.StylesManager.ThemeColors["default"];
 // defaultThemeColors["$progress-buttons-color"]= "#3C4F6D";
 // defaultThemeColors["$progress-buttons-line-color"]= "#3C4F6D";
 
-Survey.StylesManager.applyTheme(); 
+Survey.StylesManager.applyTheme();
 
 
-// We declare the main structure of the survey allong with the first page 
-// + demographics questions 
+// We declare the main structure of the survey allong with the first page
+// + demographics questions
 // + final feedback page
 
 var defsurveyJSON = {
@@ -160,7 +160,7 @@ var defsurveyJSON = {
                             value: "item3",
                             text: "'Αλλο" // Translated
                         }
-                        
+
                     ],
                     hasOther: false
                 },{
@@ -177,7 +177,7 @@ var defsurveyJSON = {
                             value: "item2",
                             text: "Όχι" // Translated
                         }
-                        
+
                     ],
                     hasOther: false
                 },
@@ -261,7 +261,7 @@ var defComparePage = {
         {
             type: "rating",
             name: "question2-",
-            title: "Παρακαλώ συγκρίνετε την πρωτότυπη με την παραγόμενη πρόταση, και βαθμολογίστε την ομοιότητα του ομιλητή στα δύο ηχητικά:", 
+            title: "Παρακαλώ συγκρίνετε την πρωτότυπη με την παραγόμενη πρόταση, και βαθμολογίστε την ομοιότητα του ομιλητή στα δύο ηχητικά:",
             isRequired: true,
             rateMin: 1,
             rateMax: 5,
@@ -288,7 +288,8 @@ var comp_lst = [0,1,2]
 
 // We declare the name of the models. Must match the name of the folders containing the generated wavs
 var models = ['DOKIMI/det', 'DOKIMI/det_LORA', 'DOKIMI/ground2', 'DOKIMI/llm', 'DOKIMI/llm_spk']
-var comp_models = ['SYGKRISI/llm_prompts_speaker', 'SYGKRISI/lora_prompts_speaker', 'SYGKRISI/baseline'] 
+// var comp_models = ['SYGKRISI/llm_prompts_speaker', 'SYGKRISI/lora_prompts_speaker', 'SYGKRISI/baseline']
+var comp_models = ['POU_MOIAZOUN/llm_spk', 'POU_MOIAZOUN/det_LORA', 'SYGKRISI/baseline']
 
 // Variable to store all paths for the wavs of the random test
 var test_paths = []
@@ -305,24 +306,24 @@ $.getJSON('static/js/tests.json', function(data) {
     //do stuff with your data here
     console.log("data:", data);
     let surveyJSON = JSON.parse(JSON.stringify(defsurveyJSON));
-    
+
     // Random integer
     // var t_idx = getRndInteger(0,5)
 
 
-    // NEW CODE TWO AUDIO 
+    // NEW CODE TWO AUDIO
     // Random element from a list
     c_idx = comp_lst[Math.floor(Math.random()*comp_lst.length)];
     console.log("Random test No: ",c_idx);
 
-    
+
     for (let i=0;i<comp_models.length;i++){
         console.log("Wavs for model ",comp_models[i]);
         let model = comp_models[i];
 
         console.log(data['comp_array'][i][c_idx]);
-        // compare same model diferent index 
-        // HERE it takes the next row if you want add 3 rows extra and tell it to take the +3 row 
+        // compare same model diferent index
+        // HERE it takes the next row if you want add 3 rows extra and tell it to take the +3 row
         mod_t_wav = data['comp_array'][i][c_idx];
         console.log("WHAT WE SHALL COMPARE FOR MODEL"+comp_models[i])
         console.log(mod_t_wav)
@@ -333,13 +334,13 @@ $.getJSON('static/js/tests.json', function(data) {
         for (let j=0; j<mod_t_wav.length; j++){
 
 
-            // TODO 
+            // TODO
             wav_path_1 = model+'/sentence_'+mod_t_wav[j].toString()+'.wav'
             wav_path_2 = model+'/sentence_'+(mod_t_wav[j]+1).toString()+'.wav'
             comp_paths.push(wav_path_1);
             comp_paths_2.push(wav_path_2);
 
-            var double_audio_html = 
+            var double_audio_html =
                 `<table style="width:100%">
                 <tr>
                     <td style="text-align:center">
@@ -358,9 +359,9 @@ $.getJSON('static/js/tests.json', function(data) {
                 </table>`
             comp_wavs_html.push(double_audio_html)
         }
-        
+
     }
-    
+
 
     arrShuffle(comp_paths, comp_wavs_html);
     console.log(comp_paths);
@@ -378,12 +379,12 @@ $.getJSON('static/js/tests.json', function(data) {
         new_html = comp_wavs_html[i];
 
         comparePage.questions[0].html = new_html;
-  
+
         comparePage.questions[0].name = comparePage.questions[0].name + idxQ;
         // idxQ++;
         comparePage.questions[1].name = comparePage.questions[1].name + idxQ;
         // idxQ++;
-       
+
         new_page = JSON.parse(JSON.stringify(comparePage));
 
         idxPush = i + 2
@@ -391,12 +392,12 @@ $.getJSON('static/js/tests.json', function(data) {
     }
 
 
-    // OLD CODE ONE AUDIO 
+    // OLD CODE ONE AUDIO
     // Random element from a list
     t_idx = tests_lst[Math.floor(Math.random()*tests_lst.length)];
     console.log("Random test No: ",t_idx);
 
-    
+
     for (let i=0;i<models.length;i++){
         break;
 
@@ -407,16 +408,16 @@ $.getJSON('static/js/tests.json', function(data) {
         mod_t_wav = data['test_array'][i][t_idx];
         console.log(mod_t_wav)
         for (let j=0; j<mod_t_wav.length; j++){
-            
+
             wav_path = model+'/sentence_'+mod_t_wav[j].toString()+'.wav'
             test_paths.push(wav_path);
 
             wav_html = `<audio controls><source src=\"${window.location.href}static/wavs/${wav_path}\" type=\"audio/wav\"> Your browser does not support the <code>audio</code> element. </audio>`
             test_wavs_html.push(wav_html)
         }
-        
+
     }
-    
+
     arrShuffle(test_paths, test_wavs_html);
     console.log(test_paths);
     console.log(test_wavs_html);
@@ -432,14 +433,14 @@ $.getJSON('static/js/tests.json', function(data) {
         new_html = test_wavs_html[i];
 
         testPage.questions[0].html = new_html;
-  
+
         testPage.questions[0].name = testPage.questions[0].name + idxQ;
         // idxQ++;
         testPage.questions[1].name = testPage.questions[1].name + idxQ;
         // idxQ++;
         testPage.questions[2].name = testPage.questions[2].name + idxQ;
         // idxQ++;
-       
+
         new_page = JSON.parse(JSON.stringify(testPage));
 
         idxPush = i + 2
