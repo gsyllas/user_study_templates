@@ -419,7 +419,6 @@ $.getJSON('static/js/tests.json', function(data) {
 
 
     for (let i=0;i<models.length;i++){
-        break;
 
         console.log("Wavs for model ",models[i]);
         let model = models[i];
