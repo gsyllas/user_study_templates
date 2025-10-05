@@ -22,6 +22,28 @@ function arrShuffle(array, array2) {
 }
 
 
+// Function for shuffling 2 array
+function arr3Shuffle(array, array2, array3) {
+    let currentIndex = array.length,  randomIndex;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+        [array2[currentIndex], array2[randomIndex]] = [array2[randomIndex], array2[currentIndex]];
+        [array3[currentIndex], array3[randomIndex]] = [array3[randomIndex], array3[currentIndex]];
+    }
+
+    return [array, array2, array3];
+}
+
+
+
+
 // Function for sending post request to flask server with image data as a tensor
 function sendDataToServer(sender, options){
 
@@ -31,8 +53,7 @@ function sendDataToServer(sender, options){
 
     // test_paths
     console.log("[SEND TO SERVER] test_paths: ", test_paths);
-    console.log("[SEND TO SERVER] comp_paths: ", comp_paths);
-    console.log("[SEND TO SERVER] comp_paths_2: ", comp_paths_2);
+    console.log("[SEND TO SERVER] comp_paths: ", comp_paths," and ", comp_paths_2);
 
     dataJSON = {}
 
@@ -42,7 +63,7 @@ function sendDataToServer(sender, options){
 
     // Get the order of the questions
     dataJSON.test_survey = test_paths
-    dataJSON.comp_survey = comp_paths
+    dataJSON.comp_survey_1 = comp_paths
     dataJSON.comp_survey_2 = comp_paths_2
 
     // Get the test number
@@ -323,7 +344,6 @@ $.getJSON('static/js/tests.json', function(data) {
 
         console.log(data['comp_array'][i][c_idx]);
         // compare same model diferent index
-        // HERE it takes the next row if you want add 3 rows extra and tell it to take the +3 row
         mod_t_wav = data['comp_array'][i][c_idx];
         console.log("WHAT WE SHALL COMPARE FOR MODEL"+comp_models[i])
         console.log(mod_t_wav)
@@ -363,7 +383,7 @@ $.getJSON('static/js/tests.json', function(data) {
     }
 
 
-    arrShuffle(comp_paths, comp_wavs_html);
+    arr3Shuffle(comp_paths, comp_paths_2, comp_wavs_html);
     console.log(comp_paths);
     console.log(comp_paths_2);
     console.log(comp_wavs_html);
