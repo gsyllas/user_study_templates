@@ -52,11 +52,11 @@ if you add 3 models in the model list it needs all the bellow, if you add 4 mode
 sudo ssh -i "vaspapts.pem" ubuntu@ec2-13-48-57-50.eu-north-1.compute.amazonaws.com
 
 ```
-   65  cd user_study_templates/
-   66  ps aux | grep python
-   67  kill 25067 25068
-   68  git pull
-   69  source venv/bin/activate
-   70  nohup python3 ratings_survey_web_app_demo/app.py > app.log 2>&1 &
-   71  ps aux | grep python
+cd user_study_templates/
+ps aux | grep python
+kill 25067 25068
+git pull
+source venv/bin/activate
+nohup python3 ratings_survey_web_app_demo/app.py > app.log 2>&1 &
+ps aux | grep python
 ```
