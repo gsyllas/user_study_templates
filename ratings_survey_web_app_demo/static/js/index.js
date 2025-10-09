@@ -362,20 +362,22 @@ $.getJSON('static/js/tests.json', function(data) {
 
             var double_audio_html =
                 `<table style="width:100%">
-                <tr>
+                  <tr>
                     <td style="text-align:center">
-                    <audio controls>
+                      <audio controls>
                         <source src="${window.location.href}static/wavs/${wav_path_1}" type="audio/wav">
                         Your browser does not support the <code>audio</code> element.
-                    </audio>
+                      </audio>
                     </td>
+                  </tr>
+                  <tr>
                     <td style="text-align:center">
-                    <audio controls>
+                      <audio controls>
                         <source src="${window.location.href}static/wavs/${wav_path_2}" type="audio/wav">
                         Your browser does not support the <code>audio</code> element.
-                    </audio>
+                      </audio>
                     </td>
-                </tr>
+                  </tr>
                 </table>`
             comp_wavs_html.push(double_audio_html)
         }
