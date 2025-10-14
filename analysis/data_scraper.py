@@ -60,6 +60,13 @@ for filename in os.listdir(INPUT_FOLDER):
     test_survey = data.get("test_survey", [])
     comp_survey_1 = data.get("comp_survey_1", [])
 
+
+    # --- Categorize based on question4 - AI nowledge ---
+    ai_nowledge = answers.get(f"question4")
+    if ai_nowledge==1 or ai_nowledge==2 or ai_nowledge==3:
+        continue
+
+
     # --- Correlate test_survey with question1a / question1b ---
     for i, path in enumerate(test_survey, start=1):
         model = get_model_prefix(path)
@@ -98,7 +105,7 @@ for model, data_dict in combined_output.items():
 # Write results
 # -------------------------------
 combined_output = dict(combined_output)
-OUTPUT_FILE = "analysis/MOS_results.json"
+OUTPUT_FILE = "analysis/experts_MOS_results.json"
 
 with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
     json.dump(combined_output, f, indent=4, ensure_ascii=False)
