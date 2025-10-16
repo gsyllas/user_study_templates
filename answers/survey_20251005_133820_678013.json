@@ -1,0 +1,34 @@
+{
+    "answers": {
+        "question1": "item2",
+        "question2": "item3",
+        "question3": "item2",
+        "question4": 5,
+        "question2-1": 4,
+        "question2-2": 5,
+        "question2-3": 3,
+        "question2-4": 3,
+        "question2-5": 3,
+        "question2-6": 5,
+        "feedback": "Πολύ καλό μπράβο "
+    },
+    "test_survey": [],
+    "comp_survey_1": [
+        "POU_MOIAZOUN/det_LORA/sentence_7.wav",
+        "POU_MOIAZOUN/det_LORA/sentence_5.wav",
+        "SYGKRISI/baseline/sentence_11.wav",
+        "POU_MOIAZOUN/llm_spk/sentence_7.wav",
+        "SYGKRISI/baseline/sentence_15.wav",
+        "POU_MOIAZOUN/llm_spk/sentence_5.wav"
+    ],
+    "comp_survey_2": [
+        "POU_MOIAZOUN/det_LORA/sentence_8.wav",
+        "POU_MOIAZOUN/det_LORA/sentence_6.wav",
+        "SYGKRISI/baseline/sentence_12.wav",
+        "POU_MOIAZOUN/llm_spk/sentence_8.wav",
+        "SYGKRISI/baseline/sentence_16.wav",
+        "POU_MOIAZOUN/llm_spk/sentence_6.wav"
+    ],
+    "testN": 4,
+    "compN": 1
+}

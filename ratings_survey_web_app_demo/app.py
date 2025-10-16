@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import json
+from datetime import datetime
+import os
+import uuid
 
 
 app = Flask(__name__, static_url_path='/static')
@@ -21,11 +24,22 @@ def postmethod():
     
     # Store data to local fodler in server e.g. in './answers/'
     # Filename should be for e.g. './answers/*.json'
-    # with open(filename, 'w', encoding='utf-8') as f:
-    #         json.dump(data, f, ensure_ascii=False, indent=4)
+    
+    # Ensure the answers folder exists
+    os.makedirs("answers", exist_ok=True)
+    
+    # Build a unique filename with timestamp + random ID
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    unique_id = uuid.uuid4().hex[:6]
+    filename = f"answers/survey_{timestamp}_{unique_id}.json"
+    
+    # Save to file
+    with open(filename, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
 
     # Return ack to client
-    return jsonify("DONE")
+    return jsonify({"status": "DONE", "file": filename})
+
 
 
 if __name__ == "__main__":
